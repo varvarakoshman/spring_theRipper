@@ -16,12 +16,21 @@ public class Config {
         return new Color(random.nextInt(255),random.nextInt(255),random.nextInt(255));
     }
 
+    @Bean
+    public ColorFrame frame(){
+        return new ColorFrame() {
+            @Override
+            protected Color getColor() {
+                return color();
+            }
+        };
+    }
     @SneakyThrows
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
         while(true){
             context.getBean(ColorFrame.class).showOnRandomPlace();
-            Thread.sleep(50);
+            Thread.sleep(100);
         }
     }
 }
