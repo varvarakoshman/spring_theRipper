@@ -1,6 +1,6 @@
 package quoters;
 
-import org.springframework.beans.BeansException;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.util.ReflectionUtils;
 
@@ -8,8 +8,9 @@ import java.lang.reflect.Field;
 import java.util.Random;
 
 public class InjectRandomIntAnnotationBeanPostProcessor implements BeanPostProcessor {
+    @SneakyThrows
     @Override
-    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+    public Object postProcessBeforeInitialization(Object bean, String beanName) {
         Field[] fields = bean.getClass().getDeclaredFields();
         for (Field field : fields) {
             InjectRandomInt annotation = field.getAnnotation(InjectRandomInt.class);
@@ -25,8 +26,9 @@ public class InjectRandomIntAnnotationBeanPostProcessor implements BeanPostProce
         return bean;
     }
 
+    @SneakyThrows
     @Override
-    public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+    public Object postProcessAfterInitialization(Object bean, String beanName){
         return bean;
     }
 }
