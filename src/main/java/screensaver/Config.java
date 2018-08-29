@@ -1,10 +1,7 @@
 package screensaver;
 
 import lombok.SneakyThrows;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.*;
 
 import java.awt.*;
 import java.util.Random;
@@ -13,6 +10,7 @@ import java.util.Random;
 @ComponentScan(basePackages = "screensaver")
 public class Config {
     @Bean
+    @Scope(value = "prototype", proxyMode = ScopedProxyMode.TARGET_CLASS)
     public Color color(){
         Random random = new Random();
         return new Color(random.nextInt(255),random.nextInt(255),random.nextInt(255));
